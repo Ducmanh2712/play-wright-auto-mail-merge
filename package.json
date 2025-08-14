@@ -1,0 +1,25 @@
+{
+    "name": "mail-merger-sender",
+    "main": "dist/index.js",
+    "type": "module",
+    "imports": {
+        "#modules/*": "./modules/*"
+    },
+    "scripts": {
+        "dev": "node index.js",
+        "build": "node esbuild.config.js",
+        "start": "node dist/index.js",
+        "format": "prettier --write ."
+    },
+    "packageManager": "pnpm@10.14.0",
+    "dependencies": {
+        "better-sqlite3": "12.2.0",
+        "playwright": "1.54.2"
+    },
+    "devDependencies": {
+        "esbuild": "0.25.9",
+        "prettier": "3.6.2",
+        "prettier-plugin-organize-imports": "4.2.0",
+        "prettier-plugin-tailwindcss": "0.6.14"
+    }
+}
