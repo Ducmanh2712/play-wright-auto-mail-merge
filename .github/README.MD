@@ -1,10 +1,10 @@
 # [![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/ovftank)
 
-<!-- https://workspace.google.com/marketplace/app/mail_merge_for_gmail/562406866377 -->
+## [link cài mail merge](https://workspace.google.com/marketplace/app/mail_merge_for_gmail/562406866377)
 
-## api create sheet
+## api tạo sheet sheet
 
-**endpoint:** `https://script.google.com/macros/s/akfycbx85vxp-pmytrunaq-lhivgk7pgwh2zlaapwuqsi0_ksey5p6bcwhmajepujattkkvqqg/exec`
+sửa api endpoint ở dòng 3, file `modules/create-sheet.js`:
 
 **request body:**
 
@@ -37,7 +37,7 @@
     }
     ```
 
-## app.js
+## app.js(file script tạo trên gg app script)
 
 ```javascript
 const createSheet = (data) => {

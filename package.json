@@ -1,25 +1,57 @@
 {
-    "name": "mail-merger-sender",
-    "main": "dist/index.js",
-    "type": "module",
+    "author": {
+        "email": "admin@ovfteam.com",
+        "name": "ovftank",
+        "url": "https://ovfteam.com"
+    },
+    "build": {
+        "appId": "com.ovfteam.mail-merger-sender",
+        "compression": "maximum",
+        "nsis": {
+            "createDesktopShortcut": true,
+            "deleteAppDataOnUninstall": true,
+            "installerIcon": "assets/icon.ico",
+            "installerLanguages": [
+                "vi_VN"
+            ],
+            "oneClick": true
+        },
+        "productName": "Mail Merger Sender",
+        "win": {
+            "icon": "assets/icon.ico",
+            "target": [
+                {
+                    "arch": [
+                        "x64"
+                    ],
+                    "target": "nsis"
+                }
+            ]
+        }
+    },
+    "dependencies": {
+        "axios": "1.11.0",
+        "playwright": "1.54.2"
+    },
+    "description": "ovfteam - cung cấp dịch vụ phát triển website trọn gói, tool MMO chuyên nghiệp và vps giá rẻ.",
+    "devDependencies": {
+        "electron": "37.3.0",
+        "electron-builder": "26.0.12",
+        "prettier": "3.6.2",
+        "prettier-plugin-tailwindcss": "0.6.14"
+    },
     "imports": {
         "#modules/*": "./modules/*"
     },
-    "scripts": {
-        "dev": "node index.js",
-        "build": "node esbuild.config.js",
-        "start": "node dist/index.js",
-        "format": "prettier --write ."
-    },
+    "main": "index.js",
+    "name": "mail-merger-sender",
     "packageManager": "pnpm@10.14.0",
-    "dependencies": {
-        "better-sqlite3": "12.2.0",
-        "playwright": "1.54.2"
+    "productName": "Mail Merger Sender",
+    "scripts": {
+        "build": "electron-builder --win",
+        "format": "prettier --write .",
+        "start": "electron ."
     },
-    "devDependencies": {
-        "esbuild": "0.25.9",
-        "prettier": "3.6.2",
-        "prettier-plugin-organize-imports": "4.2.0",
-        "prettier-plugin-tailwindcss": "0.6.14"
-    }
+    "type": "module",
+    "version": "1.0.0"
 }
