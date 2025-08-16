@@ -4,7 +4,7 @@
 
 ## api create sheet
 
-**endpoint:** `https://script.google.com/macros/s/akfycbx85vxp-pmytrunaq-lhivgk7pgwh2zlaapwuqsi0_ksey5p6bcwhmajepujattkkvqqg/exec`
+**endpoint:** `https://script.google.com/macros/s/AKfycbx85vXP-pmyTrUNAq-LHIvGK7PGwh2zlaApwuQSi0_KSeY5p6BCWHmAJePUjAtTKkVQqg/exec`
 
 **request body:**
 

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mail Merger Sender - @beerick94</title>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="./assets/css/scroll-bar.css" />
+    </head>
+    <body class="min-h-screen select-none overflow-hidden border-2 border-green-500/50 bg-black font-['Share_Tech_Mono']" style="-webkit-app-region: drag">
+        <header class="relative h-16 border-b border-green-500/50 bg-black/90 px-6 shadow-lg shadow-green-500/20">
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="absolute inset-0 bg-[linear-gradient(90deg,transparent_50%,rgba(0,255,0,0.03)_50%)] bg-[length:4px_4px]"></div>
+            </div>
+
+            <div class="relative z-10 flex h-full items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="relative">
+                        <div class="flex h-10 w-10 items-center justify-center rounded-none border-2 border-green-500 bg-black shadow-lg shadow-green-500/50">
+                            <img src="./assets/icon.ico" class="h-6 w-6" alt="Mail Merger Icon" />
+                        </div>
+                        <div class="absolute -right-1 -top-1 h-3 w-3 animate-pulse rounded-full border border-green-500 bg-green-500"></div>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <h1 class="text-2xl font-bold tracking-wider text-green-500">MAIL MERGER SENDER</h1>
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm font-medium text-gray-400">tele:</span>
+                            <span class="text-sm font-semibold text-green-400 hover:text-green-300 cursor-pointer transition-colors duration-300 select-text">@beerick94</span>
+                            <div class="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3" style="-webkit-app-region: no-drag">
+                    <button id="minimize-btn" tabindex="-1" class="group flex h-10 w-10 items-center justify-center rounded-none border border-green-500/50 bg-black/80 transition-all duration-300 hover:border-green-500 hover:bg-green-500/10">
+                        <i class="fa-solid fa-window-minimize text-green-500 transition-colors duration-300 group-hover:text-green-400"></i>
+                    </button>
+
+                    <button id="close-btn" tabindex="-1" class="group flex h-10 w-10 items-center justify-center rounded-none border border-green-500/50 bg-black/80 transition-all duration-300 hover:border-red-500 hover:bg-red-500/10">
+                        <i class="fa-solid fa-xmark text-green-500 transition-colors duration-300 group-hover:text-red-400"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex h-[calc(100vh-4rem)] flex-1 flex-col overflow-y-auto p-6 text-white" style="-webkit-app-region: no-drag">
+            <div class="flex gap-6 h-full">
+                <div class="flex-1 w-1/2">
+                    <div class="flex flex-col h-full gap-4">
+                        <div class="flex-1 flex flex-col">
+                            <label for="mail-list" class="block text-sm font-medium text-green-400 mb-2"> <i class="fa-solid fa-envelope mr-2"></i>Mail List </label>
+                            <textarea id="mail-list" name="mail-list" rows="10" placeholder="mail@conmeo.com|password123|mailkp1&#10;mail2@conga.com|password456|mailkp2&#10;mail3@conbo.com|password789|mailkp3" class="w-full flex-1 p-4 bg-black/50 border-2 border-green-500/30 rounded-none text-green-300 placeholder-green-600/50 font-mono text-sm resize-none focus:border-green-500 focus:outline-none transition-colors duration-300"></textarea>
+                        </div>
+
+                        <div class="flex-1 flex flex-col">
+                            <label for="proxy-list" class="block text-sm font-medium text-green-400 mb-2"> <i class="fa-solid fa-network-wired mr-2"></i>Proxy List </label>
+                            <textarea id="proxy-list" name="proxy-list" rows="6" placeholder="conbo.proxy.com:8080:username:password&#10;conmeo.proxy.com:8080:username:password&#10;convit.proxy.com:8080:username:password" class="w-full flex-1 p-4 bg-black/50 border-2 border-green-500/30 rounded-none text-green-300 placeholder-green-600/50 font-mono text-sm resize-none focus:border-green-500 focus:outline-none transition-colors duration-300"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-1/2 flex-shrink-0">
+                    <div class="flex flex-col h-full">
+                        <div class="mb-4">
+                            <label for="subject" class="block text-sm font-medium text-green-400 mb-2"> <i class="fa-solid fa-tag mr-2"></i>Subject </label>
+                            <input type="text" id="subject" name="subject" placeholder="Enter email subject..." class="w-full p-4 bg-black/50 border-2 border-green-500/30 rounded-none text-green-300 placeholder-green-600/50 font-mono text-sm focus:border-green-500 focus:outline-none transition-colors duration-300" />
+                        </div>
+
+                        <div class="flex-1 flex flex-col">
+                            <label for="body" class="block text-sm font-medium text-green-400 mb-2"> <i class="fa-solid fa-file-lines mr-2"></i>Body </label>
+                            <textarea id="body" name="body" rows="10" placeholder="Enter email body content..." class="w-full flex-1 p-4 bg-black/50 border-2 border-green-500/30 rounded-none text-green-300 placeholder-green-600/50 font-mono text-sm resize-none focus:border-green-500 focus:outline-none transition-colors duration-300"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-6 mt-6">
+                <div class="flex-1 w-1/2">
+                    <div class="flex gap-4">
+                        <button id="open-sheets-history-btn" class="w-full p-4 bg-green-500/20 border-2 border-green-500/50 rounded-none text-green-400 font-mono text-sm font-medium hover:bg-green-500/30 hover:border-green-400 transition-all duration-300 focus:outline-none focus:border-green-400 cursor-pointer"><i class="fa-solid fa-history mr-2"></i>XEM DS SHEET</button>
+                        <button id="gen-sheet-btn" class="w-full p-4 bg-green-500/20 border-2 border-green-500/50 rounded-none text-green-400 font-mono text-sm font-medium hover:bg-green-500/30 hover:border-green-400 transition-all duration-300 focus:outline-none focus:border-green-400 cursor-pointer"><i class="fa-solid fa-table mr-2"></i>TẠO LINK SHEET</button>
+                    </div>
+                </div>
+                <div class="w-1/2 flex-shrink-0">
+                    <div class="flex gap-4 items-center">
+                        <div>
+                            <div class="bg-green-500/20 flex border-2 border-green-500/50 rounded-none p-2 text-center hover:bg-green-500/30 hover:border-green-400 transition-all duration-300">
+                                <button id="decrease-threads" class="px-2 py-1 bg-green-500/30 border-green-500/50 border-2 border-r-0 rounded-none text-green-400 hover:bg-green-500/50 hover:border-green-400 transition-all duration-300 focus:outline-none focus:border-green-400 cursor-pointer">
+                                    <i class="fa-solid fa-minus text-xs"></i>
+                                </button>
+                                <input type="number" id="threads" name="threads" min="1" max="50" value="1" class="w-full bg-black/50 border-2 border-x-0 border-green-500/50 rounded-none text-green-300 font-mono text-sm text-center focus:outline-none transition-colors duration-300 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
+                                <button id="increase-threads" class="px-2 border-l-0 py-1 bg-green-500/30 border-2 border-green-500/50 rounded-none text-green-400 hover:bg-green-500/50 transition-all duration-300 focus:outline-none cursor-pointer">
+                                    <i class="fa-solid fa-plus text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button id="send-mail-btn" class="flex-1 p-4 bg-green-500/20 border-2 border-green-500/50 rounded-none text-green-400 font-mono text-sm font-medium hover:bg-green-500/30 hover:border-green-400 transition-all duration-300 focus:outline-none focus:border-green-400 cursor-pointer">
+                            <i class="fa-solid fa-paper-plane mr-2"></i>
+                            <span>GỬI MAIL</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="./assets/js/play-beep.js"></script>
+        <script src="./assets/js/script.js"></script>
+    </body>
+</html>

@@ -1,5 +1,4 @@
 {
-    "plugins": ["prettier-plugin-tailwindcss", "prettier-plugin-organize-imports"],
     "endOfLine": "crlf",
     "htmlWhitespaceSensitivity": "css",
     "jsxSingleQuote": true,
@@ -7,5 +6,11 @@
     "singleQuote": true,
     "tabWidth": 4,
     "trailingComma": "none",
-    "printWidth": 999999999
+    "printWidth": 999999999,
+    "overrides": [
+        {
+            "files": "*.html",
+            "plugins": ["prettier-plugin-tailwindcss"]
+        }
+    ]
 }

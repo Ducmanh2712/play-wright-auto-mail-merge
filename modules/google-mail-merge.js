@@ -70,12 +70,12 @@ class GoogleMailMerge {
     }
 
     /**
-     * kiểm tra có phải lỗi browser security không
+     * lỗi browser security
      * @returns {Promise<boolean>}
      */
     async #isSecurityError() {
         try {
-            const securityText = this.page.getByText("This browser or app may not be secure");
+            const securityText = this.page.getByText('This browser or app may not be secure');
             await securityText.waitFor({ state: 'visible', timeout: 2000 });
             return true;
         } catch {
@@ -160,72 +160,63 @@ class GoogleMailMerge {
         await this.page.goto(this.config.sheetLink, { waitUntil: 'load' });
     }
 
-
     /**
      * @param {string} subject - subject
      * @param {string} body - body mail
      * @returns {Promise<void>}
      */
     async #sendTemplateMail(subject, body) {
+        try {
+            const dialog = this.page.getByRole('dialog', { name: 'Mail Merge for Gmail' });
+            await dialog.waitFor({ state: 'visible', timeout: 10000 });
+
+            const iframeContent = this.page.getByRole('dialog', { name: 'Mail Merge for Gmail' }).locator('iframe').first().contentFrame().locator('#sandboxFrame').contentFrame().locator('#userHtmlFrame').contentFrame();
+
+            const editBtn = iframeContent.getByRole('button', { name: 'Edit template' });
+            await editBtn.waitFor({ state: 'visible', timeout: 10000 });
+            await editBtn.click();
+
+            const subjectInput = iframeContent
+                .locator('div')
+                .filter({ hasText: /^Email subject$/ })
+                .getByRole('textbox');
+            await subjectInput.waitFor({ state: 'visible', timeout: 10000 });
+
+            await subjectInput.fill(subject);
+
+            const moreBtn = iframeContent.getByRole('button', { name: 'More...' });
+            await moreBtn.waitFor({ state: 'visible', timeout: 5000 });
+            await moreBtn.click();
+
+            const sourceBtn = iframeContent.getByRole('button', { name: 'Source code' });
+            await sourceBtn.waitFor({ state: 'visible', timeout: 5000 });
+            await sourceBtn.click();
+
+            const htmlTextarea = iframeContent.locator('textarea[type="text"]');
+            await htmlTextarea.waitFor({ state: 'visible', timeout: 10000 });
+
+            await htmlTextarea.fill(body);
+
+            const saveBtn = iframeContent.getByTitle('Save');
+            await saveBtn.waitFor({ state: 'visible', timeout: 5000 });
+            await saveBtn.click();
+
+            const saveCloseBtn = iframeContent.getByRole('button', { name: 'Save and close' });
+            await saveCloseBtn.waitFor({ state: 'visible', timeout: 10000 });
+
+            await saveCloseBtn.click();
+
+            const sendButton = iframeContent.getByRole('button', { name: /^Send \d+ emails$/ });
+            await sendButton.waitFor({ state: 'visible', timeout: 10000 });
+            await sendButton.click();
             try {
-                const dialog = this.page.getByRole('dialog', { name: 'Mail Merge for Gmail' });
-                await dialog.waitFor({ state: 'visible', timeout: 10000 });
-
-                const iframeContent = this.page
-                    .getByRole('dialog', { name: 'Mail Merge for Gmail' })
-                    .locator('iframe')
-                    .first()
-                    .contentFrame()
-                    .locator('#sandboxFrame')
-                    .contentFrame()
-                    .locator('#userHtmlFrame')
-                    .contentFrame();
-
-                const editBtn = iframeContent.getByRole('button', { name: 'Edit template' });
-                await editBtn.waitFor({ state: 'visible', timeout: 10000 });
-                await editBtn.click();
-
-                const subjectInput = iframeContent
-                    .locator('div')
-                    .filter({ hasText: /^Email subject$/ })
-                    .getByRole('textbox');
-                await subjectInput.waitFor({ state: 'visible', timeout: 10000 });
-
-                await subjectInput.fill(subject);
-
-                const moreBtn = iframeContent.getByRole('button', { name: 'More...' });
-                await moreBtn.waitFor({ state: 'visible', timeout: 5000 });
-                await moreBtn.click();
-
-                const sourceBtn = iframeContent.getByRole('button', { name: 'Source code' });
-                await sourceBtn.waitFor({ state: 'visible', timeout: 5000 });
-                await sourceBtn.click();
-
-                const htmlTextarea = iframeContent.locator('textarea[type="text"]');
-                await htmlTextarea.waitFor({ state: 'visible', timeout: 10000 });
-
-                await htmlTextarea.fill(body);
-
-                const saveBtn = iframeContent.getByTitle('Save');
-                await saveBtn.waitFor({ state: 'visible', timeout: 5000 });
-                await saveBtn.click();
-
-                const saveCloseBtn = iframeContent.getByRole('button', { name: 'Save and close' });
-                await saveCloseBtn.waitFor({ state: 'visible', timeout: 10000 });
-
-                await saveCloseBtn.click();
-
-                const sendButton = iframeContent.getByRole('button', { name: /^Send \d+ emails$/ });
-                await sendButton.waitFor({ state: 'visible', timeout: 10000 });
-                await sendButton.click();
-                try {
-                    const campaignMessage = iframeContent.getByText(/Your campaign is on the way/);
-                    await campaignMessage.waitFor({ state: 'visible', timeout: 20000 });
-                } catch {
-                    //
-                }
+                const campaignMessage = iframeContent.getByText(/Your campaign is on the way/);
+                await campaignMessage.waitFor({ state: 'visible', timeout: 20000 });
             } catch {
                 //
+            }
+        } catch {
+            //
         }
     }
 
